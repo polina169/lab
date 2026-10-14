@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Закаты мира{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header>
+    <h1>🌅 Закаты мира</h1>
+    <nav>
+        <a href="{% url 'index' %}">Главная</a>
+        <a href="{% url 'about' %}">Обо мне</a>
+    </nav>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    © 2026 Закаты мира · Родионычева Полина ИСТбд-22
+</footer>
+
+<!-- Модальное окно -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Просмотр фото">
+</div>
+
+<script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const photos = document.querySelectorAll('.gallery img');
+
+    photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            lightboxImg.src = photo.src;
+            lightbox.classList.add('show');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('show');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('show');
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            lightbox.classList.remove('show');
+        }
+    });
+</script>
+
+</body>
+</html>
