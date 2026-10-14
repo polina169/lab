@@ -1,0 +1,15 @@
+{% extends "gallery/base.html" %}
+{% load static %}
+
+{% block title %}Главная — Закаты мира{% endblock %}
+
+{% block content %}
+<h2>Моя галерея закатов</h2>
+<p>Каждый закат уникален. Здесь собраны лучшие моменты.</p>
+
+<div class="gallery">
+    {% for i in "12345678" %}
+        <img src="{% static 'images/' %}{{ i }}.jpg" alt="Закат {{ i }}">
+    {% endfor %}
+</div>
+{% endblock %}
